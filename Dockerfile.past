@@ -1,0 +1,8 @@
+FROM fedora:20
+RUN yum -y install sudo passwd python-pip && \
+    useradd -m dave && echo "dave:dave" | usermod dave -aG wheel && \
+    passwd -d dave && \
+    yum clean all
+RUN echo "echo Thu Jan 9 12:18:11 UTC 2014" > /usr/bin/date
+USER dave
+WORKDIR /home/dave
