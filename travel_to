@@ -2,9 +2,10 @@
 
 if [ $1 = "2014-01-09" ]; then
     host="dave-nb";
-elif [ $1 = "2016-04-22" ]; then
-    host="random-pc"];
+    docker run -i -t -h $host $1 /bin/bash;
+    host="pcjeremy";
+    docker run -i -t -h $host debian-demo /bin/bash;
 else 
     host="mcyprian-pc"
+    docker run -i -t -h $host $1 /bin/bash;
 fi  
-docker run -i -t -h $host $1 /bin/bash;

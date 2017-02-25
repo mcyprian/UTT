@@ -5,4 +5,3 @@ RUN yum -y install sudo passwd python-pip && \
     yum clean all
 RUN echo "echo Thu Jan 9 12:18:11 UTC 2014" > /usr/bin/date
 USER dave
-WORKDIR /home/dave

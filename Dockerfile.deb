@@ -1,0 +1,8 @@
+FROM debian:latest
+RUN apt-get update -y && \
+    apt-get install -y python3 python3-pip sudo && \
+    apt-get clean all && \
+    useradd -ms /bin/bash jeremy && echo "jeremy:jeremy" | chpasswd && \
+    adduser jeremy sudo
+USER jeremy
+WORKDIR /home/jeremy
