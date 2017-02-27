@@ -1,0 +1,12 @@
+FROM fedora:latest
+RUN dnf -y install sudo passwd python3-ipython 'dnf-command(copr)' && \
+    dnf -y copr enable mcyprian/sp && \
+    dnf -y update python3 python3-setuptools --nogpgcheck --releasever=rawhide && \
+    useradd -m mcyprian && echo "mcyprian:mcyprian" | usermod mcyprian -aG wheel && \
+    passwd -d mcyprian && \
+    pip install Jinja2 && \
+    dnf clean all
+RUN echo "echo Fri Nov 24 10:33:21 UTC 2017" > /usr/bin/date && \
+    echo "The Fedora of the future" > /etc/redhat-release
+USER mcyprian
+WORKDIR /home/mcyprian

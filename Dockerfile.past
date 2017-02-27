@@ -1,5 +1,5 @@
 FROM fedora:20
-RUN yum -y install sudo passwd python-pip && \
+RUN yum -y install sudo passwd python-pip python-ipython && \
     useradd -m dave && echo "dave:dave" | usermod dave -aG wheel && \
     passwd -d dave && \
     yum clean all
