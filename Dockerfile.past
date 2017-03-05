@@ -1,7 +1,13 @@
-FROM fedora:20
-RUN yum -y install sudo passwd python-pip python-ipython && \
+FROM fedora:22
+MAINTAINER Michal Cyprian <m.cyprian@gmail.com>
+
+RUN dnf -y install sudo passwd libfaketime python-pip python-ipython && \
     useradd -m dave && echo "dave:dave" | usermod dave -aG wheel && \
     passwd -d dave && \
-    yum clean all
-RUN echo "echo Thu Jan 9 12:18:11 UTC 2014" > /usr/bin/date
+    dnf clean all && \
+    pip3 install requests && echo y | pip3 uninstall requests && \
+    echo y | pip uninstall iniparse && pip install iniparse && \
+    dnf -y install --downloadonly python3-requests && \
+    echo "echo Tue Sep 29 20:31:05 UTC 2015" > /usr/bin/date
 USER dave
+WORKDIR /home/dave

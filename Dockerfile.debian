@@ -1,0 +1,12 @@
+FROM debian:latest
+MAINTAINER Michal Cyprian <m.cyprian@gmail.com>
+
+RUN apt-get update -y && \
+    apt-get install -y python3 python3-pip ipython3 sudo && \
+    apt-get clean all && \
+    useradd -ms /bin/bash jeremy && echo "jeremy:jeremy" | chpasswd && \
+    adduser jeremy sudo && passwd -d jeremy && \
+    pip3 install requests && echo y | pip3 uninstall requests && \
+    echo "echo Mon Feb  1 11:46:01 UTC 2016" > /usr/bin/date && chmod 755 /usr/bin/date
+USER jeremy
+WORKDIR /home/jeremy

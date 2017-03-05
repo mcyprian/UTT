@@ -1,4 +1,6 @@
 FROM fedora:latest
+MAINTAINER Michal Cyprian <m.cyprian@gmail.com>
+
 RUN dnf -y install sudo passwd python3-ipython 'dnf-command(copr)' && \
     dnf -y copr enable mcyprian/sp && \
     dnf -y update python3 python3-setuptools --nogpgcheck --releasever=rawhide && \

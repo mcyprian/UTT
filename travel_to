@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 
-if [ $1 = "2014-01-09" ]; then
+if [[ $1 =~ ^"2015" ]]; then
     host="dave-nb";
-    docker run -i -t -h $host $1 /bin/bash;
+    docker run -i -t -h $host 2015-09-29 /bin/bash;
     host="pcjeremy";
     docker run -i -t -h $host debian-demo /bin/bash;
 else 
