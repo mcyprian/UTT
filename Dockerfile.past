@@ -8,6 +8,7 @@ RUN dnf -y install sudo passwd libfaketime python-pip python-ipython && \
     pip3 install requests && echo y | pip3 uninstall requests && \
     echo y | pip uninstall iniparse && pip install iniparse && \
     dnf -y install --downloadonly python3-requests && \
-    echo "echo Tue Sep 29 20:31:05 UTC 2015" > /usr/bin/date
+    cp /usr/bin/date /usr/libexec/date && \
+    echo "FAKETIME=\$SET_DATE' 20:31:05' /usr/libexec/date" > /usr/bin/date
 USER dave
 WORKDIR /home/dave

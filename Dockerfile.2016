@@ -1,0 +1,11 @@
+FROM fedora:23
+MAINTAINER Michal Cyprian <m.cyprian@gmail.com>
+
+RUN dnf -y install sudo passwd libfaketime python-pip python-ipython && \
+    useradd -m martin && echo "martin:martin" | usermod martin -aG wheel && \
+    passwd -d martin && \
+    dnf clean all && \
+    cp /usr/bin/date /usr/libexec/date && \
+    echo "FAKETIME=\$SET_DATE' 12:30:13' /usr/libexec/date" > /usr/bin/date
+USER martin
+WORKDIR /home/martin

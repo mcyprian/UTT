@@ -1,11 +1,19 @@
 #!/usr/bin/bash
 
-if [[ $1 =~ ^"2015" ]]; then
-    host="dave-nb";
-    docker run -i -t -h $host 2015-09-29 /bin/bash;
-    host="pcjeremy";
-    docker run -i -t -h $host debian-demo /bin/bash;
-else 
-    host="mcyprian-pc"
-    docker run -i -t -h $host $1 /bin/bash;
+if [[ $1 =~ ^"2014" ]]; then
+    host="catherine-pc"
+    image=$1
+elif [[ $1 =~ ^"2015" ]]; then
+    host="dave-nb"
+    image=$1
+elif [[ $1 =~ ^"2016" ]]; then
+    host="martin-nb"
+    image=$1
+else
+    host="lewis-pc"
+    image='2017-12-21'
 fi  
+docker run -e LD_PRELOAD='/usr/lib64/faketime/libfaketime.so.1' -e SET_DATE=$1 -i -t -h $host ${image%%-*} bash
+if [[ $1 =~ ^"2015" ]]; then
+    docker run -e LD_PRELOAD='/usr/lib/x86_64-kfreebsd-gnu/faketime/libfaketime.so.1' -e SET_DATE='2016-02-01' -i -t -h "pc-jeremy" debian-demo bash
+fi
