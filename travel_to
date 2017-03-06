@@ -1,5 +1,14 @@
 #!/usr/bin/bash
 
+if [[ $1 -ne "future" ]]; then
+    date -d "$1" > /dev/null 2>&1
+
+    if [[ $? ]]; then
+        echo "Invalid date $1"
+        exit 1
+    fi
+fi
+
 if [[ $1 =~ ^"2014" ]]; then
     randtime="23:46:21"
     host="catherine-pc"
@@ -17,7 +26,7 @@ else
     host="lewis-pc"
     image='2017-12-21'
 fi  
-docker run -e SET_DATE="$1 $randtime" \
+docker run -e SET_DATE="$image $randtime" \
 	   -e START_DATE="$(date)" \
 	   -i -t -h $host ${image%%-*} \
 	   bash
