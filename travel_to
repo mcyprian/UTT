@@ -1,19 +1,28 @@
 #!/usr/bin/bash
 
 if [[ $1 =~ ^"2014" ]]; then
+    randtime="23:46:21"
     host="catherine-pc"
     image=$1
 elif [[ $1 =~ ^"2015" ]]; then
+    randtime="20:31:05"
     host="dave-nb"
     image=$1
 elif [[ $1 =~ ^"2016" ]]; then
+    randtime="06:14:33"
     host="martin-nb"
     image=$1
 else
+    randtime="10:33:21"
     host="lewis-pc"
     image='2017-12-21'
 fi  
-docker run -e LD_PRELOAD='/usr/lib64/faketime/libfaketime.so.1' -e SET_DATE=$1 -i -t -h $host ${image%%-*} bash
+docker run -e SET_DATE="$1 $randtime" \
+	   -e START_DATE="$(date)" \
+	   -i -t -h $host ${image%%-*} \
+	   bash
 if [[ $1 =~ ^"2015" ]]; then
-    docker run -e LD_PRELOAD='/usr/lib/x86_64-kfreebsd-gnu/faketime/libfaketime.so.1' -e SET_DATE='2016-02-01' -i -t -h "pc-jeremy" debian-demo bash
+    docker run -e SET_DATE="2016-02-01 11:46:01" \
+	       -e START_DATE="$(date)" \
+               -i -t -h "pc-jeremy" debian_demo bash
 fi

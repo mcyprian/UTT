@@ -7,6 +7,8 @@ RUN apt-get update -y && \
     useradd -ms /bin/bash jeremy && echo "jeremy:jeremy" | chpasswd && \
     adduser jeremy sudo && passwd -d jeremy && \
     pip3 install requests && echo y | pip3 uninstall requests && \
-    echo "echo Mon Feb  1 11:46:01 UTC 2016" > /usr/bin/date && chmod 755 /usr/bin/date
+    mkdir -p /usr/libexec && cp /bin/date /usr/libexec/date
+COPY ./mydate /usr/bin/date
+RUN chmod 755 /usr/bin/date
 USER jeremy
 WORKDIR /home/jeremy

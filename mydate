@@ -1,0 +1,9 @@
+#!/bin/sh
+
+a=$(/usr/libexec/date --date "$START_DATE" +%s)
+b=$(/usr/libexec/date -d "$SET_DATE" +%s)
+
+difference=$(($b-$a))
+difference=$difference' seconds'
+
+echo "$(/usr/libexec/date --date "$difference")"

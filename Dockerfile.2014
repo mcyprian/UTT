@@ -1,11 +1,11 @@
 FROM fedora:20
 MAINTAINER Michal Cyprian <m.cyprian@gmail.com>
 
-RUN yum -y install sudo passwd libfaketime python-pip python-ipython && \
+RUN yum -y install sudo passwd python-pip python-ipython && \
     useradd -m catharine && echo "catharine:catharine" | usermod catharine -aG wheel && \
     passwd -d catharine && \
     yum clean all && \
-    cp /usr/bin/date /usr/libexec/date && \
-    echo "FAKETIME=\$SET_DATE' 23:46:21' /usr/libexec/date" > /usr/bin/date
+    cp /usr/bin/date /usr/libexec/date
+COPY ./mydate /usr/bin/date
 USER catharine
 WORKDIR /home/catharine
