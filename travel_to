@@ -1,9 +1,11 @@
 #!/usr/bin/bash
 
-if [[ $1 -ne "future" ]]; then
-    date -d "$1" > /dev/null 2>&1
+image=$1
 
-    if [[ $? ]]; then
+if [[ ${image} -ne "future" ]]; then
+    date -d "$image" > /dev/null 2>&1
+
+    if (( $? != 0 )); then
         echo "Invalid date $1"
         exit 1
     fi
@@ -12,15 +14,12 @@ fi
 if [[ $1 =~ ^"2014" ]]; then
     randtime="23:46:21"
     host="catherine-pc"
-    image=$1
 elif [[ $1 =~ ^"2015" ]]; then
     randtime="20:31:05"
     host="dave-nb"
-    image=$1
 elif [[ $1 =~ ^"2016" ]]; then
     randtime="06:14:33"
     host="martin-nb"
-    image=$1
 else
     randtime="10:33:21"
     host="lewis-pc"
